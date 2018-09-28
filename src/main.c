@@ -41,20 +41,20 @@ Support functions
 void CreateIconPixmap( void ) {
 	icon = xcb_generate_id( c );
 	xcb_create_pixmap( c, screen->root_depth, icon, screen->root, 11, 14 );
-	SulfurDrawFill( icon, SULFUR_COLOR_WHITE, 0, 0, 11, 14 );
-	SulfurDrawFill( icon, SULFUR_COLOR_RED, 3, 2, 5, 10 );
-	SulfurDrawFill( icon, SULFUR_COLOR_RED, 2, 4, 7, 6 );
-	SulfurDrawLine( icon, SULFUR_COLOR_YELLOW, 5, 1, 1, 5 );
-	SulfurDrawLine( icon, SULFUR_COLOR_YELLOW, 1, 6, 1, 8 );
-	SulfurDrawLine( icon, SULFUR_COLOR_ORANGE, 9, 5, 9, 8 );
-	SulfurDrawLine( icon, SULFUR_COLOR_ORANGE, 8, 9, 5, 12 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 5, 0, 0, 5 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 0, 6, 0, 8 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 1, 9, 5, 13 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 5, 0, 0, 5 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 6, 12, 10, 8 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 10, 7, 10, 5 );
-	SulfurDrawLine( icon, SULFUR_COLOR_BLACK, 9, 4, 6, 1 );
+	SGrafDrawFill( icon, SULFUR_COLOR_WHITE, 0, 0, 11, 14 );
+	SGrafDrawFill( icon, SULFUR_COLOR_RED, 3, 2, 5, 10 );
+	SGrafDrawFill( icon, SULFUR_COLOR_RED, 2, 4, 7, 6 );
+	SGrafDrawLine( icon, SULFUR_COLOR_YELLOW, 5, 1, 1, 5 );
+	SGrafDrawLine( icon, SULFUR_COLOR_YELLOW, 1, 6, 1, 8 );
+	SGrafDrawLine( icon, SULFUR_COLOR_ORANGE, 9, 5, 9, 8 );
+	SGrafDrawLine( icon, SULFUR_COLOR_ORANGE, 8, 9, 5, 12 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 5, 0, 0, 5 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 0, 6, 0, 8 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 1, 9, 5, 13 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 5, 0, 0, 5 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 6, 12, 10, 8 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 10, 7, 10, 5 );
+	SGrafDrawLine( icon, SULFUR_COLOR_BLACK, 9, 4, 6, 1 );
 	xcb_flush( c );
 } 
 
@@ -63,18 +63,18 @@ void DrawBar( void ) {
 	time_t rawTime;
 	struct tm* timeInfo;
 
-	SulfurDrawFill( window, colorWhite, 0, 0, screen->width_in_pixels, 20 );
-	SulfurDrawLine( window, colorBlack, 0, 19, screen->width_in_pixels, 19 );
+	SGrafDrawFill( window, colorWhite, 0, 0, screen->width_in_pixels, 20 );
+	SGrafDrawLine( window, colorBlack, 0, 19, screen->width_in_pixels, 19 );
 
-	SulfurDrawLine( window, colorBlack, 0, 0, 0, 4 );
-	SulfurDrawLine( window, colorBlack, 1, 0, 4, 0 );
-	SulfurDrawLine( window, colorBlack, 1, 1, 1, 2 );
-	SulfurDrawLine( window, colorBlack, 1, 1, 2, 1 );
+	SGrafDrawLine( window, colorBlack, 0, 0, 0, 4 );
+	SGrafDrawLine( window, colorBlack, 1, 0, 4, 0 );
+	SGrafDrawLine( window, colorBlack, 1, 1, 1, 2 );
+	SGrafDrawLine( window, colorBlack, 1, 1, 2, 1 );
 
-	SulfurDrawLine( window, colorBlack, screen->width_in_pixels - 1, 0, screen->width_in_pixels - 5, 0 );
-	SulfurDrawLine( window, colorBlack, screen->width_in_pixels - 1, 0, screen->width_in_pixels - 1, 4 );
-	SulfurDrawLine( window, colorBlack, screen->width_in_pixels - 2, 1, screen->width_in_pixels - 2, 2 );
-	SulfurDrawLine( window, colorBlack, screen->width_in_pixels - 2, 1, screen->width_in_pixels - 3, 1 );
+	SGrafDrawLine( window, colorBlack, screen->width_in_pixels - 1, 0, screen->width_in_pixels - 5, 0 );
+	SGrafDrawLine( window, colorBlack, screen->width_in_pixels - 1, 0, screen->width_in_pixels - 1, 4 );
+	SGrafDrawLine( window, colorBlack, screen->width_in_pixels - 2, 1, screen->width_in_pixels - 2, 2 );
+	SGrafDrawLine( window, colorBlack, screen->width_in_pixels - 2, 1, screen->width_in_pixels - 3, 1 );
 
 	xcb_copy_area( c, icon, window, sulfurGc, 0, 0, 17, 2, 11, 14 );
 
@@ -120,7 +120,7 @@ event handlers
 void DoButtonRelease( xcb_button_release_event_t *e  ) {
 	if ( e->event_x < 30 && e->event_x > 14 && e->event_y < 20 ) {
 		if ( fork() == 0 ) {
-			execlp( "xterm", NULL );
+			execlp( "xterm", "xterm", NULL );
 		}
 	}
 }

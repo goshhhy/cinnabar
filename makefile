@@ -1,4 +1,4 @@
-CFLAGS ?= -Wall -g
+CFLAGS ?= -Wall -s -Os -flto
 # xcb headers
 CFLAGS != pkgconf --cflags xcb
 CFLAGS += -L../sulfur/ -lsulfur
